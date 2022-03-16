@@ -1,0 +1,73 @@
+
+
+{% if error %}
+{{ error }}
+
+<br/>
+<br/>
+{% endif %}
+
+<!-- <h1>Signup!</h1> -->
+
+<!-- <form method = "POST" action="{% url 'signup' %}">
+    {% csrf_token %}
+    username:
+    <br/>
+    <input type="text" name="username" />
+    <br/>
+    Password:
+    <br/>
+    <input type="password" name="password1" />
+    <br/>
+    confirm Password:
+    <br/>
+    <input type="password" name="password2" />
+    <br/>
+    <input class ="btn btn-primary" type="submit" value= "signup" />
+    <br/>
+
+</form> -->
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title> Stock Predictor Regiter </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+    <body>
+        <!-- component -->
+        <section class="w-full text-gray-900 py-36 bg-center bg-cover bg-no-repeat"
+            style="background:url('https://images.unsplash.com/photo-1623479322729-28b25c16b011?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=1280')">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 flex items-center justify-center">
+                <div class="lg:w-3/6 lg:pr-0 pr-0">
+                    <h1 class="font-medium text-5xl text-white">Christopher  Registration </h1>
+                    
+                </div>
+                <form method = "POST" action="{% url 'signup' %}">
+                    {% csrf_token %}
+                <div class="lg:w-3/6 xl:w-2/5 md:w-full bg-gray-50 p-8 flex flex-col lg:ml-auto w-full mt-10 lg:mt-0 rounded-md" style="
+                width: 100%;
+            ">
+                    <div class="relative mb-4">
+                        <label for="full-name" class="leading-7 text-sm text-gray-600">Name</label>
+                        <input type="text" id="name" name="username" class="w-full bg-white rounded-md border border-gray-300 focus:border-indigo-600 focus:ring-2 focus:ring-indigo-200 text-sm outline-none text-gray-900 py-1 px-3 leading-8 transition-colors duration-150 ease-in-out">
+                    </div>
+    
+                    <div class="relative mb-4">
+                        <label for="email" class="leading-7 text-sm text-gray-600">Password   </label>
+                        <input type="password" id="phone" name="password1" class="w-full bg-white rounded-md border border-gray-300 focus:border-indigo-600 focus:ring-2 focus:ring-indigo-200 text-sm outline-none text-gray-900 py-1 px-3 leading-8 transition-colors duration-150 ease-in-out">
+                    </div>
+                    <div class="relative mb-4">
+                        <label for="" class="leading-7 text-sm text-gray-600">Confirm Password</label>
+                        <input type="password"  name="password2"class="w-full bg-white rounded-md border border-gray-300 focus:border-indigo-600 focus:ring-2 focus:ring-indigo-200 text-sm outline-none text-gray-900 py-1 px-3 leading-8 transition-colors duration-150 ease-in-out">
+                    </div>
+                    
+                    <button class="text-white bg-indigo-500 rounded-md border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 text-lg" type="submit">Submit</button>
+                </div>
+                </form>
+            </div>
+        </section>
+      </body>
+</html>
+
