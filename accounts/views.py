@@ -18,8 +18,31 @@ def signup(request):
         return render(request,'accounts/signup.html') 
 
 def login(request):
-    if request.method == 'POST':
-        user = auth.authenticate(username=request.POST['username'],password = request.POST['password'])
+    print("inside login")
+
+    try:
+        user = auth.authenticate(username=request.GET['username'],password = request.GET['password'])
+        print("user")
+        print(user)
+        if user is not None:
+            auth.login(request,user)
+            return redirect('home')
+        else:
+            return render (request,'accounts/login.html', {'error':'Username or password is incorrect!'})
+    except:
+        return render(request,'accounts/Login.html')
+def check(request):
+
+    print("inside")
+    print(request.method)
+    # print(request.status)
+
+        # print()
+    if request.method == 'GET':
+        print("inside post")
+        user = auth.authenticate(username=request.GET['username'],password = request.GET['password'])
+        print("user")
+        print(user)
         if user is not None:
             auth.login(request,user)
             return redirect('home')
@@ -29,6 +52,8 @@ def login(request):
         return render(request,'accounts/Login.html')
 
 def logout(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
+        print("inside post")
+
         auth.logout(request)
     return redirect('home')
