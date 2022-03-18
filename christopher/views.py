@@ -2,8 +2,11 @@ from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib import auth
-
-
+import joblib
+import pandas as pd
+import json
+import requests
+import numpy as np
 def home(request):
     
     return render(request,'accounts/dashboard.html')
@@ -13,7 +16,62 @@ def home(request):
 
 #     # return HttpResponse("working")
 #     return render(request,'accounts/dashboard.html')
-def calculate(request):
+def prediction(request):
+    url = "https://alpha-vantage.p.rapidapi.com/query"
+
+    querystring = {"symbol":"MSFT","function":"TIME_SERIES_INTRADAY","interval":"1min","output_size":"compact","datatype":"json"}
+
+    headers = {
+        'x-rapidapi-host': "alpha-vantage.p.rapidapi.com",
+        'x-rapidapi-key': "f19d833b21msha1a10a46cd5a8b6p121be2jsnac0df7ca04d3"
+        }
+
+    response = requests.request("GET", url, headers=headers, params=querystring)
+    response = json.loads(response.content.decode("UTF-8"))
+    # df = pd.DataFrame(response)
+    df1 = pd.DataFrame(response["Time Series (1min)"])
+    df1 = df1.transpose()
+    df1.columns = ['Open', 'High', 'Low', 'Close', 'Volume']
+    df1 = df1.iloc[::-1]
+    df1 = df1.tail(1)
+    df1.reset_index(inplace = True)
+    df1.columns = ["Date", 'Open', 'High', 'Low', 'Close', 'Volume']
+    df1['Volume'].replace(to_replace=0, method='ffill', inplace=True) 
+    df1= df1.astype({ "Date": str, "Open": float, "High" : float, "Low" : float, "Close" : float, "Volume": int})
+    first_column = df1.pop('Close')
+    df1.insert(0, 'Close', first_column)
+
+    url = "https://alpha-vantage.p.rapidapi.com/query"
+
+    querystring = {"function":"TIME_SERIES_DAILY","symbol":"MSFT","outputsize":"compact","datatype":"json"}
+
+    headers = {
+        'x-rapidapi-host': "alpha-vantage.p.rapidapi.com",
+        'x-rapidapi-key': "f19d833b21msha1a10a46cd5a8b6p121be2jsnac0df7ca04d3"
+        }
+
+    response = requests.request("GET", url, headers=headers, params=querystring)
+    response = json.loads(response.content.decode("UTF-8"))
+    df = pd.DataFrame(response["Time Series (Daily)"])
+    df = df.transpose()
+    df.columns = ['Open', 'High', 'Low', 'Close', 'Volume']
+    df = df.iloc[::-1]
+    df = df.tail(1)
+    df.reset_index(inplace = True)
+    df.columns = ["Date", 'Open', 'High', 'Low', 'Close', 'Volume']
+    df['Volume'].replace(to_replace=0, method='ffill', inplace=True) 
+    df= df.astype({ "Date": str, "Open": float, "High" : float, "Low" : float, "Close" : float, "Volume": int})
+    first_column = df.pop('Close')
+    df.insert(0, 'Close', first_column)
+    l1 = list(calculate_change(df, df1))
+    l1 = np.array(l1)
+    model = joblib.load("/home/ayush/Documents/stock_prediction/christopher/test_model")
+    print(model.predict(l1))
+
+def calculate_change(df, dict1):
+    return -(df["Open"][len(df)-1]-dict1["Open"])/df["Open"][len(df)-1], -(df["High"][len(df)-1]-dict1["High"])/df["High"][len(df)-1], -(df["Low"][len(df)-1]-dict1["Low"])/df["Low"][len(df)-1], -(df["Volume"][len(df)-1]-dict1["Volume"])/df["Volume"][len(df)-1]
+
+def calculate_news_prediction(request):
 # -*- coding: utf-8 -*-
     data_comp = request.POST.get('company_name')
     # Commented out IPython magic to ensure Python compatibility.
