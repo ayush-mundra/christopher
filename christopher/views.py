@@ -82,7 +82,7 @@ def prediction(request):
         l1 = np.array(l1)
         # model = joblib.load("/home/ayush/Documents/stock_prediction/christopher/test_model")
         # print(model.predict(l1))
-        pct_change = 0
+        # 
         pct_change = random.uniform(-1, 1)
         print("pct_change", pct_change)
         curr_time = datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S.%f')

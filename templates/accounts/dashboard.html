@@ -151,41 +151,38 @@
       {% endif %}
 
       {% if news_senti > 0 %}
-      <td style="background-color: rgb(112, 216, 80);"> positive  {{ news_senti}}</td>
+      <td style="background-color: rgb(112, 216, 80);"> positive  </td>
       {% elif news_senti == 0 %}
-      <td style="background-color:rgb(94, 80, 216);">Neutral {{ news_senti}} </td>
+      <td style="background-color:rgb(14, 180, 245);">Neutral  </td>
       {% else %}
-      <td style="background-color: rgb(216, 80, 125);">Negative {{ news_senti}}</td>
+      <td style="background-color: rgb(255, 7, 28);">Negative </td>
       {% endif %}  
+      <td style="background-color: rgb(112, 216, 80);"> positive </td>
+
+      {% if pct_change > 0 %}
+      <td style="background-color: rgb(112, 216, 80);"> positive  </td>
+      {% elif pct_change == 0 %}
+      <td style="background-color:rgb(14, 180, 245);">Neutral  </td>
+      {% else %}
+      <td style="background-color: rgb(255, 7, 28);">Negative </td>
+      {% endif %}  
+
       <td style="background-color: rgb(236, 240, 235);"> (future work) </td>
 
-      {% if pert_change > 0 %}
-      <td style="background-color: rgb(112, 216, 80);"> positive  {{ pert_change}}</td>
-      {% elif pert_change == 0 %}
-      <td style="background-color:rgb(94, 80, 216);">Neutral {{ pert_change}} </td>
-      {% else %}
-      <td style="background-color: rgb(216, 80, 125);">Negative {{ pert_change}}</td>
-      {% endif %}  
-
-      <td style="background-color: rgb(236, 240, 235);"> (future work) </td>
-
-      <td>(future work)</td>
       {% if curr_time %}
       <td>{{curr_time}}</td>
       {% else %}
-      <td style="background-color: rgb(216, 80, 125);">Negative </td>
       <td>12:52 AM IST 15th March 2022</td>
       {% endif %}
       
       {% if news_senti >= 0 and pct_change >= 0 %}
-
       <td style="background-color: rgb(67, 212, 86);">Buy It</td>
-      {% elif news_senti >= 0 and pct_change < 0}
-      <td style="background-color: rgb(77, 67, 212);">Don't buy or sell</td>'
+      {% elif news_senti >= 0 and pct_change < 0%}
+      <td style="background-color:rgb(14, 180, 245);">Don't buy or sell</td>'
       {% elif news_senti < 0 and pct_change >= 0%} 
-      <td style="background-color: rgb(77, 67, 212);">Don't buy or sell</td>'
+      <td style="background-color:rgb(14, 180, 245);">Don't buy or sell</td>'
       {% else %}
-      <td style="background-color: rgb(212, 67, 91);">sell</td>
+      <td style="background-color: rgb(255, 7, 28);">sell</td>
       {% endif %}  
 
 
@@ -200,24 +197,22 @@
       <td style="background-color: rgb(112, 216, 80);">positive</td>
 
       <td style="background-color: rgb(112, 216, 80);">positive</td>
-
+      <td style="background-color: rgb(112, 216, 80);"> positive </td>
       <td>Buy it for more than 2 years</td>
-      <td>Buy it </td>
       <td>12:52 AM IST 15th March 2022</td>
-      <td style="background-color: rgb(212, 125, 67);">Buy It</td>
+      <td style="background-color: rgb(112, 216, 80);">Buy It</td>
     </tr>
     <tr>
       <th scope="row">Google</th>
       <td>120$</td>
       <td>135$</td>
-      <td style="background-color: rgb(216, 80, 80);">negative</td>
+      <td style="background-color: rgb(255, 7, 28);">negative</td>
 
-      <td style="background-color: rgb(216, 80, 80);">negative</td>
-      <td style="background-color: rgb(216, 80, 125);">Negative </td>
-      <td style="background-color: rgb(216, 80, 125);">Negative </td>
-      <td>Sell it </td>
+      <td style="background-color: rgb(255, 7, 28);">negative</td>
+      <td style="background-color: rgb(255, 7, 28);">Negative </td>
+      <td style="background-color: rgb(255, 7, 28);">sell after 2 months </td>
       <td>15:52 AM IST 25th March 2022</td>
-      <td style="background-color: rgb(68, 150, 218);">Sell It</td>
+      <td style="background-color:rgb(14, 180, 245);">Don't buy or Sell It</td>
     </tr>
 
    
