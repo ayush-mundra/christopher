@@ -83,7 +83,8 @@ def prediction(request):
         # model = joblib.load("/home/ayush/Documents/stock_prediction/christopher/test_model")
         # print(model.predict(l1))
         # 
-        pct_change = random.uniform(-1, 1)
+        predictions_arr = {"AMZN":1.2, "AAPL": -0.4,  "GOOGL" : 0.04, "MSFT": 1.4, "TSLA": -.20,"BRK.B": 1.2, "NVDA":-1.2, "FB" :-.14}
+        pct_change = predictions_arr[data_comp]
         print("pct_change", pct_change)
         curr_time = datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S.%f')
         news_senti = calculate_news_prediction(request, str(data_comp))
